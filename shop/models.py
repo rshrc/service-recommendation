@@ -44,3 +44,28 @@ class Product(models.Model):
     def get_absolute_url(self):
             return reverse('shop:product_detail',
                            args=[self.id, self.slug])
+
+
+class Service(models.Model):
+    category = models.ForeignKey(Category,
+                                 related_name='services',
+                                 on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,
+                                related_name='servicing',
+                                on_delete=models.CASCADE, default="")
+    name = models.CharField(max_length=200, db_index=True)
+    slug = models.SlugField(max_length=200, db_index=True)
+    description = models.TextField(blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('name',)
+        index_together = (('id', 'slug'),)
+
+    def __str__(self):
+        return self.name
+
+    # def get_absolute_url(self):
+    #     return reverse('shop:product_detail',
+    #                    args=[self.id, self.slug])
