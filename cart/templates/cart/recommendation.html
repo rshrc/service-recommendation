@@ -1,0 +1,118 @@
+<html>
+
+<head>
+    <title>Dell Recommned</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+</head>
+
+<body>
+<nav class='black'>
+    <div class="nav-wrapper">
+        <a href="{% url 'get_recommend' %}" class="brand-logo center" style="font-size: 32px;">Dell Recommend</a>
+        </u>
+    </div>
+</nav>
+<div class="site-wrapper" style="margin-top:-25px;">
+
+    {% if product_added %}
+        <div class="row">
+            <div class="col-sm-4">
+
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text" style="text-align: center;">
+                        {% if cluster_assigned == 0 %}
+                            <h3>0th Cluster Assigned</h3>
+                        {% else %}
+                            <h3>1st Cluster Assigned</h3>
+                        {% endif %}
+                        <h3>Predicted Sales : {{ predicted_sales }}</h3>
+                    </div>
+                    <div class="card-action">
+                        <a href="{% url 'get_recommend' %}">Predict Again</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% else %}
+        <div class="text-center"
+             style="background-color: rgba(255,255,255,0.8);border-radius:50px;margin-top:50px;padding-top:10px;padding-bottom:10px;">
+
+
+            <div class="row" style="width: -moz-fit-content;">
+                <div class="col-sm-4">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text" style="text-align: center;">
+                            <span class="flow-text">
+
+                                <span class="card-title" style="font-size: 32px">What is it about ?</span>
+
+                            </span>
+                            <p>A Sales Prediction Web-App to Forecast Sales of a newly launched product on the basis of
+                                product features and pre-release demands.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="{% url 'get_recommend`' %}">Go Predict!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row" style="width: -moz-fit-content;">
+                <div class="col-sm-4">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="flow-text">
+
+                                <span class="card-title"
+                                      style="text-align: center; font-size: 32px;">Machine  Learning Algorithm Performances</span>
+
+                            </span>
+                            <u>
+                                <p style="font-size: 24px">K-Means Clustering Accuracy</p>
+                            </u>
+                            <h6>Silhouette Score : 0.6485412</h6>
+                            <u>
+                                <p style="font-size: 24px">Classification Accuracy</p>
+                            </u>
+                            <h6>Training Set Accuracy : 0.99</h6></p>
+                            <h6>Test Set Accuracy : 0.97</h6>
+                            <h6>10-Fold Cross Validation Average Accuracy : 0.984</h6>
+                            <u>
+                                <p style="font-size: 24px">Prediction Accuracy</p>
+                            </u>
+                            <h6>Training Set Accuracy : 0.85</h6></p>
+                            <h6>Test Set Accuracy : 0.76</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--<h1 align="center" class='lead-mb-7'>Add your Product</h1> -->
+            <div class="container">
+                <center>
+                    <form id="product_form" method="post">
+                        <table class="striped centered">
+                            {% csrf_token %} {{ product_form }}
+                        </table>
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Predict
+                        </button>
+                    </form>
+                </center>
+            </div>
+        </div>
+    {% endif %}
+</div>
+</body>
+<script>
+    AOS.init();
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</html>
+
+<h1>Recommendation Page</h1>
