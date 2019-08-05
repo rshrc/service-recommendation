@@ -1,0 +1,14 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+  Services
+{% endblock %}
+
+{% block content %}
+    <ul>
+    {% for service in services %}
+        <li>{{ service }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

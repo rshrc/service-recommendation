@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Product
+from .models import Category, Product, Service
 from cart.forms import CartAddProductForm
 
 
@@ -28,3 +28,8 @@ def product_detail(request, id, slug):
                   {'product': product,
                    'cart_product_form': cart_product_form})
 
+
+def service_page(request):
+    services = Service.objects.all()
+
+    return render(request, 'shop/product/services.html', {'services': services})

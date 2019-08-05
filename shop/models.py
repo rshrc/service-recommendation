@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
+
 class Category(models.Model):
     name = models.CharField(max_length=200,
                             db_index=True)
@@ -16,8 +17,8 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-            return reverse('shop:product_list_by_category',
-                           args=[self.slug])
+        return reverse('shop:product_list_by_category',
+                       args=[self.slug])
 
 
 class Product(models.Model):
@@ -42,5 +43,21 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-            return reverse('shop:product_detail',
-                           args=[self.id, self.slug])
+        return reverse('shop:product_detail',
+                       args=[self.id, self.slug])
+
+
+class Service(models.Model):
+    name = models.CharField(max_length=200, db_index=True)
+    slug = models.SlugField(max_length=200, db_index=True, default="")
+
+    class Meta:
+        ordering = ('name',)
+        index_together = (('id', 'slug'),)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('shop:service_page',
+                       args=[self.id, self.slug])
