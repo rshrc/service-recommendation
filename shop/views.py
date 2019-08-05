@@ -17,6 +17,14 @@ def product_list(request, category_slug=None):
                    'products': products})
 
 
+def service_page(request):
+    return render(request, 'shop/services.html', {})
+
+
+def support_page(request):
+    return render(request, 'shop/support.html', {})
+
+
 def service_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()

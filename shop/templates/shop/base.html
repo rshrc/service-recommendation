@@ -2,32 +2,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <title>{% block title %}Dell Service Recommend{% endblock %}</title>
-  <link href="{% static "css/base.css" %}" rel="stylesheet">
+    <meta charset="utf-8"/>
+    <title>{% block title %}Dell Service Recommend{% endblock %}</title>
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
 </head>
 <body>
-  <div id="header">
+<div id="header">
     <a href="/" class="logo">Dell Service Recommend</a>
-  </div>
-  <div id="subheader">
+</div>
+{% if user.is_authenticated %}
+    <p>Hi {{ user.username }}
+    <p><a href="{% url 'logout' %}">Log out</a></p>
+    <div id="subheader">
     <div class="cart">
-      {% with total_items=cart|length %}
-          {% if cart|length > 0 %}
-            Your cart: 
-            <a href="{% url "cart:cart_detail" %}">
-              {{ total_items }} item{{ total_items|pluralize }},
-              ₹{{ cart.get_total_price }}
-            </a>
-          {% else %}
-            Your cart is empty.
-          {% endif %}
+        {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
+                Your cart:
+                <a href="{% url "cart:cart_detail" %}">
+                    {{ total_items }} item{{ total_items|pluralize }},
+                    ₹{{ cart.get_total_price }}
+                </a>
+            {% else %}
+                Your cart is empty.
+            {% endif %}
         {% endwith %}
     </div>
-  </div>
-  <div id="content">
+</div>
+<div id="content">
     {% block content %}
     {% endblock %}
-  </div>
+</div>
+{% else %}
+    <p><a href="{% url 'signup' %}">Sign Up</a></p>
+    <p><a href="{% url 'login' %}">Log In </a></p>
+{% endif %}
+
 </body>
 </html>
