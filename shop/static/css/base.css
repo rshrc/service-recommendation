@@ -120,6 +120,8 @@ ul.errorlist {
     padding:10px 100px;
     font-size:18px;
     overflow:auto;
+    background:#ececec;
+    color:#444;
 }
 
 #subheader {
