@@ -1,6 +1,6 @@
 from decimal import Decimal
 from django.conf import settings
-from shop.models import Product
+from shop.models import Product, Service
 
 
 class Cart(object):
@@ -22,12 +22,17 @@ class Cart(object):
         from the database.
         """
         product_ids = self.cart.keys()
+        service_ids = self.cart.keys()
         # get the product objects and add them to the cart
         products = Product.objects.filter(id__in=product_ids)
+        services = Service.objects.filter(id__in=service_ids)
 
         cart = self.cart.copy()
         for product in products:
             cart[str(product.id)]['product'] = product
+
+        for service in services:
+            cart[str(service.id)]['service'] = service
 
         for item in cart.values():
             item['price'] = Decimal(item['price'])

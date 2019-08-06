@@ -29,6 +29,16 @@ def product_detail(request, id, slug):
                    'cart_product_form': cart_product_form})
 
 
+def service_detail(request, id):
+    service = get_object_or_404(Service, id=id)
+
+    cart_product_form = CartAddProductForm()
+    return render(request,
+                  'shop/product/service_detail.html',
+                  {'service': service,
+                   'cart_product_form': cart_product_form})
+
+
 def service_page(request):
     services = Service.objects.all()
 

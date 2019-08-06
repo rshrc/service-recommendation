@@ -17,7 +17,11 @@
                         <h5 class="card-title">{{ service }}</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional
                             content.</p>
-                        <a href="#" class="btn btn-primary">Buy</a>
+                        <form action="{% url "cart:cart_add" service.id %}" method="post">
+                            {{ cart_product_form }}
+                            {% csrf_token %}
+                            <input type="submit" value="Buy" class="btn-success">
+                        </form>
                     </div>
                 </div>
             </div>

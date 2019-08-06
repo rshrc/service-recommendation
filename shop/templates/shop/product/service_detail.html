@@ -1,0 +1,27 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ service.name }}
+{% endblock %}
+
+{% block content %}
+    <div class="product-detail">
+        <img src="{% if service.image %}{{ service.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+        <h1>{{ service.name }}</h1>
+        <h2><a href="{{ service.category.get_absolute_url }}">{{ service.category }}</a></h2>
+        <p class="price">₹{{ service.price }}</p>
+        <form action="{% url "cart:cart_add" service.id %}" method="post">
+            {{ cart_service_form }}
+            {% csrf_token %}
+            <input type="submit" value="Buy Again">
+        </form>
+        {{ service.description|linebreaks }}
+        <a href="{% url "shop:service_page" %}" type="submit" class="btn btn-success">
+            Service services
+        </a>
+        <a href="{% url "shop:support_page" %}" type="submit" class="btn btn-success">
+            Support Services
+        </a>
+    </div>
+{% endblock %}
