@@ -6,6 +6,7 @@ from cart.forms import CartAddProductForm
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
+    current_user = request.user.userprofile
     products = Product.objects.filter(available=True)
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
@@ -14,7 +15,8 @@ def product_list(request, category_slug=None):
                   'shop/product/list.html',
                   {'category': category,
                    'categories': categories,
-                   'products': products})
+                   'products': products,
+                   'current_user': current_user})
 
 
 def product_detail(request, id, slug):

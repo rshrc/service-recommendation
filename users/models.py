@@ -53,7 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, related_name='profile', on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     birthday = models.DateField(blank=True)
     gold_member = models.BooleanField(default=False)
     city = models.CharField(max_length=200, default="", blank=True)
@@ -63,4 +63,9 @@ class UserProfile(models.Model):
     support_list = models.ManyToManyField(Support, related_name='support_lists', blank=True)
 
     def __str__(self):
-        return self.user.email + " " + str(self.birthday) + " " + self.city + ", " + self.country + " Gold Member: " + str(self.gold_member)
+        return self.user.email + " " + str(
+            self.birthday) + " " + self.city + ", " + self.country + " Gold Member: " + str(self.gold_member)
+
+
+
+
