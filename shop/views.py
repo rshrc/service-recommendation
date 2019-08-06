@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Product, Service
+from .models import Category, Product, Service, Support
 from cart.forms import CartAddProductForm
 
 
@@ -33,3 +33,9 @@ def service_page(request):
     services = Service.objects.all()
 
     return render(request, 'shop/product/services.html', {'services': services})
+
+
+def support_page(request):
+    supports = Support.objects.all()
+
+    return render(request, 'shop/product/support.html', {'supports': supports})

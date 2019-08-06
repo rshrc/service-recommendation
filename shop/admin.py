@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Service
+from .models import Category, Product, Service, Support
 
 
 @admin.register(Category)
@@ -10,6 +10,11 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
+    list_display = ['name']
+
+
+@admin.register(Support)
+class SupportAdmin(admin.ModelAdmin):
     list_display = ['name']
 
 

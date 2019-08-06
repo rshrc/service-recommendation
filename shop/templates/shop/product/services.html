@@ -2,13 +2,27 @@
 {% load static %}
 
 {% block title %}
-  Services
+    Services
 {% endblock %}
 
 {% block content %}
-    <ul>
-    {% for service in services %}
-        <li>{{ service }}</li>
-    {% endfor %}
-    </ul>
+    {% if services.count == 0 %}
+        <h1>No Service Available</h1>
+    {% endif %}
+    <div class="row">
+        {% for service in services %}
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ service }}</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional
+                            content.</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+        <br>
+    </div>
 {% endblock %}

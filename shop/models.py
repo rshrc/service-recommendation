@@ -50,6 +50,7 @@ class Product(models.Model):
 class Service(models.Model):
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True, default="")
+    description = models.TextField(blank=True)
 
     class Meta:
         ordering = ('name',)
@@ -60,4 +61,21 @@ class Service(models.Model):
 
     def get_absolute_url(self):
         return reverse('shop:service_page',
+                       args=[self.id, self.slug])
+
+
+class Support(models.Model):
+    name = models.CharField(max_length=400, db_index=True)
+    slug = models.SlugField(max_length=400, db_index=True, default="")
+    description = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ('name',)
+        index_together = (('id', 'slug'),)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('shop:support_page',
                        args=[self.id, self.slug])

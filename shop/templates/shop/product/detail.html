@@ -17,11 +17,11 @@
             <input type="submit" value="Buy Again">
         </form>
         {{ product.description|linebreaks }}
-        <a href="{% url "shop:service_page" %}" type="submit" value="support" class="btn btn-success">
-            Support
-        </a>
-        <a type="submit" value="service_products" class="btn btn-success">
+        <a href="{% url "shop:service_page" %}" type="submit" class="btn btn-success">
             Service Products
+        </a>
+        <a href="{% url "shop:support_page" %}" type="submit" class="btn btn-success">
+            Support Services
         </a>
     </div>
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+  Support
+{% endblock %}
+
+{% block content %}
+    {% if supports.count == 0 %}
+    <h1>No Support Available</h1>
+    {% endif %}
+    <ul>
+    {% for support in supports %}
+        <li>{{ support }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
