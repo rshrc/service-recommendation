@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import Category, Product, Service, Support
 
+admin.site.site_header = 'Dell Recommend Administration'
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
