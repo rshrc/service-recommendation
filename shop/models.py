@@ -34,6 +34,7 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    conversion_rate = models.IntegerField(default=0, blank=True)
 
     class Meta:
         ordering = ('name',)
@@ -51,6 +52,7 @@ class Service(models.Model):
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True, default="")
     description = models.TextField(blank=True)
+    conversion_rate = models.IntegerField(default=0, blank=True)
 
     class Meta:
         ordering = ('name',)
