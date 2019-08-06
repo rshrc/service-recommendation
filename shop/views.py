@@ -51,3 +51,8 @@ def support_page(request):
     supports = Support.objects.all()
 
     return render(request, 'shop/product/support.html', {'supports': supports})
+
+
+def sample_render(request):
+    services = Service.objects.all()
+    return render(request, 'shop/product/sample.html', {'services': services})
