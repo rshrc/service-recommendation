@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Product, Service, Support
 from cart.forms import CartAddProductForm
+from shop.forms import FeedbackForm
 
 
 def product_list(request, category_slug=None):
@@ -41,18 +42,27 @@ def service_detail(request, id):
                    'cart_product_form': cart_product_form})
 
 
-def service_page(request):
-    services = Service.objects.all()
-
-    return render(request, 'shop/product/services.html', {'services': services})
-
-
 def support_page(request):
     supports = Support.objects.all()
 
     return render(request, 'shop/product/support.html', {'supports': supports})
 
 
-def sample_render(request):
+def service_render(request):
     services = Service.objects.all()
-    return render(request, 'shop/product/sample.html', {'services': services})
+
+    return render(request, 'shop/product/services-.html', {'services': services})
+
+
+def feedback_form(request):
+    if request.method == 'POST':
+        feedback_form = FeedbackForm(data=request.POST)
+        if feedback_form.is_valid():
+            feedback_detail = feedback_form.save()
+            feedback_detail.save()
+        # Not a HTTP POST, so we render our form using two ModelForm instances.
+        # These forms will be blank, ready for user input.
+    else:
+        feedback_form = FeedbackForm()
+    return render(request, 'shop/product/feedback.html',
+                  {'feedback_form': feedback_form})

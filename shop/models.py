@@ -79,3 +79,12 @@ class Support(models.Model):
     def get_absolute_url(self):
         return reverse('shop:support_page',
                        args=[self.id, self.slug])
+
+
+class Feedback(models.Model):
+    name = models.CharField(max_length=100, blank=True)
+    rating = models.IntegerField(blank=True)
+    comments = models.CharField(max_length=500, blank=True)
+
+    def __str__(self):
+        return self.name + " " + str(self.rating)

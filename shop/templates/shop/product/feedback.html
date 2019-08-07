@@ -1,0 +1,20 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+    Feedback Form
+{% endblock %}
+
+{% block content %}
+    
+    <h1>Feedback Form
+        <form id="product_form" method="post">
+            <table class="striped centered">
+                {% csrf_token %} {{ feedback_form }}
+            </table>
+            <button class="btn btn-success" type="submit" name="action">
+                Submit Feedback
+            </button>
+        </form>
+    </h1>
+{% endblock %}

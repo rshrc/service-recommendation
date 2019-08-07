@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Service, Support
+from .models import Category, Product, Service, Support, Feedback
 
 admin.site.site_header = 'Dell Recommend Administration'
 
@@ -8,6 +8,11 @@ admin.site.site_header = 'Dell Recommend Administration'
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
+
+
+@admin.register(Feedback)
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ['name', 'rating', 'comments']
 
 
 @admin.register(Service)
