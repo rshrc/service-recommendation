@@ -66,3 +66,15 @@ def feedback_form(request):
         feedback_form = FeedbackForm()
     return render(request, 'shop/product/feedback.html',
                   {'feedback_form': feedback_form})
+
+
+
+def service_purchased(request):
+    current_user = request.user.userprofile
+    print("Current User : " + str(current_user.conversion_rate))
+
+    if current_user.conversion_rate == 0:
+        current_user.conversion_rate = 1
+        request.user.userprofile.save()
+    print("Current User : " + str(current_user.conversion_rate))
+    return render(request, 'shop/product/service_purchased.html', {})

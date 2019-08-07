@@ -12,4 +12,5 @@ urlpatterns = [
     path('supports', views.support_page, name='support_page'),
     path('services-', views.service_render, name='service_render'),
     path('feedback', views.feedback_form, name='give_feedback'),
+    path('service/purchased/', views.service_purchased, name='service_purchased'),
 ]
